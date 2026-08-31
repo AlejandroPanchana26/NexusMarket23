@@ -18,7 +18,7 @@ public class Inventory {
     // Bodega donde se encuentran físicamente las existencias.
     private Warehouse warehouse;
 
-    // Cantidad disponible para venta. No puede ser negativa (regla del dominio).
+    // Cantidad disponible para venta.
     private Integer availableQuantity;
 
     // Cantidad apartada para pedidos en proceso.
