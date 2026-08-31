@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public abstract class Person {
 
-    // Identificador único de la persona (documento de identidad o identificación tributaria).
+    // Identificador único de la persona.
     private String identification;
     private String name;
     private String email;
