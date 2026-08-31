@@ -16,6 +16,6 @@ public class User {
     private String password;
     private UserStatus status;
 
-    // Persona (comprador o vendedor) que este usuario representa en el sistema.
+    // Persona, comprador o vendedor
     private Person person;
 }
