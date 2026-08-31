@@ -14,9 +14,9 @@ public class Warehouse {
     private String name;
     private String address;
 
-    // Tipo de bodega: del Marketplace o de un vendedor.
+    // Tipo de bodega ya sea del marketplace o de un vendedor.
     private WarehouseType type;
 
-    // Vendedor propietario. Es nulo cuando la bodega pertenece al Marketplace.
+  // Si es bodega de un vendedor, aquí va ese vendedor, si es del marketplace, queda vacío
     private Seller owner;
 }
