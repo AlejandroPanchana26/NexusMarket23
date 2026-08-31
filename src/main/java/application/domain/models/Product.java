@@ -18,13 +18,13 @@ public abstract class Product {
     private String name;
     private String description;
 
-    // Se usa BigDecimal para el precio porque es el tipo adecuado para valores monetarios.
+
     private BigDecimal price;
 
     // Vendedor propietario del producto.
     private Seller seller;
 
-    // Variantes del producto (color, talla, modelo, etc.). Vacía por defecto.
+    // Variantes del producto color, talla, modelo, demas - Vacía por defecto.
     private List<String> variants = new ArrayList<>();
 
     private ProductStatus status;
