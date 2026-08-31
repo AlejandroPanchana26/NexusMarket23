@@ -7,7 +7,7 @@ import lombok.Getter;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public abstract class DomainCatalog {
 
-    // Solo el code define la igualdad: dos catálogos con el mismo code son el mismo valor.
+    // Solo el code define la igualdad, dos catálogos con el mismo code son el mismo valor.
     @EqualsAndHashCode.Include
     private final String code;
     private final String name;
