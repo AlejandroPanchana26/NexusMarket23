@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Buyer extends Person {
 
-    // Dirección habitual de entrega del comprador (obligatoria según la especificación).
+    // Dirección habitual de entrega del comprador.
     private String principalAddress;
 
     // Direcciones secundarias de entrega. Se inicializa vacía porque son opcionales.
