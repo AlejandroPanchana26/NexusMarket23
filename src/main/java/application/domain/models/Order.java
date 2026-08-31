@@ -20,10 +20,10 @@ public class Order {
     // Comprador que realiza el pedido.
     private Buyer buyer;
 
-    // Líneas del pedido. Vacía por defecto.
+    // Líneas del pedido, esta permanecera vacia por defecto
     private List<OrderDetail> details = new ArrayList<>();
 
-    // Estado actual dentro del ciclo de vida del pedido.
+    // Estado actual dentro del ciclo del pedido.
     private OrderStatus status;
 
     private LocalDateTime creationDate;
