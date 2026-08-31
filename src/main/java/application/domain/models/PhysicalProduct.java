@@ -11,6 +11,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class PhysicalProduct extends Product {
 
-    // Peso del producto. Los productos físicos requieren inventario y despacho.
+    // Peso del producto, diferenciamos producto fisico de digital.
     private BigDecimal weight;
 }
