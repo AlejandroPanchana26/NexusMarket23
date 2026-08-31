@@ -17,6 +17,6 @@ public class OrderDetail {
     // Precio unitario acordado en el pedido.
     private BigDecimal unitPrice;
 
-    // Subtotal de la línea (cantidad por precio unitario).
+    // Subtotal de la línea, cantidad por precio unitario.
     private BigDecimal subtotal;
 }
