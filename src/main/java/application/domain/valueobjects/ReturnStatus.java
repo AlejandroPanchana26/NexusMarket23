@@ -3,13 +3,13 @@ package application.domain.valueobjects;
 public final class ReturnStatus extends DomainCatalog {
 
     public static final ReturnStatus REQUESTED = new ReturnStatus(
-            "REQUESTED", "Solicitada", "El comprador solicitó la devolución del pedido.");
+            "REQUESTED", "Requested", "Buyer requested the return.");
     public static final ReturnStatus APPROVED = new ReturnStatus(
-            "APPROVED", "Aprobada", "La devolución fue aprobada y puede continuar.");
+            "APPROVED", "Approved", "Return approved and may proceed.");
     public static final ReturnStatus REJECTED = new ReturnStatus(
-            "REJECTED", "Rechazada", "La devolución fue rechazada.");
+            "REJECTED", "Rejected", "Return rejected.");
     public static final ReturnStatus COMPLETED = new ReturnStatus(
-            "COMPLETED", "Completada", "La devolución finalizó satisfactoriamente.");
+            "COMPLETED", "Completed", "Return completed successfully.");
 
     private ReturnStatus(String code, String name, String description) {
         super(code, name, description);

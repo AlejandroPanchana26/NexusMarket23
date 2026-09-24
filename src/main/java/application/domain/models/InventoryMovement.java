@@ -1,5 +1,6 @@
 package application.domain.models;
 
+import application.domain.exceptions.BusinessRuleViolationException;
 import application.domain.valueobjects.InventoryMovementType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,19 @@ public class InventoryMovement {
 
     // Usuario que realizó el movimiento.
     private User performedBy;
+
+    public InventoryMovement(Inventory inventory, InventoryMovementType movementType,
+                             int quantity, User performedBy) {
+        if (inventory == null || movementType == null || performedBy == null) {
+            throw new BusinessRuleViolationException("Movement requires inventory, type and user.");
+        }
+        if (quantity < 0) {
+            throw new BusinessRuleViolationException("Movement quantity cannot be negative.");
+        }
+        this.inventory = inventory;
+        this.movementType = movementType;
+        this.quantity = quantity;
+        this.performedBy = performedBy;
+        this.date = LocalDateTime.now();
+    }
 }

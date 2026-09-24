@@ -3,11 +3,11 @@ package application.domain.valueobjects;
 public final class UserStatus extends DomainCatalog {
 
     public static final UserStatus ACTIVE = new UserStatus(
-            "ACTIVE", "Activo", "El usuario puede acceder al sistema con normalidad.");
+            "ACTIVE", "Active", "User can access the system normally.");
     public static final UserStatus INACTIVE = new UserStatus(
-            "INACTIVE", "Inactivo", "El usuario existe pero no puede realizar operaciones en el sistema.");
+            "INACTIVE", "Inactive", "User exists but cannot perform system operations.");
     public static final UserStatus BLOCKED = new UserStatus(
-            "BLOCKED", "Bloqueado", "El acceso del usuario ha sido suspendido.");
+            "BLOCKED", "Blocked", "User access has been suspended.");
 
     private UserStatus(String code, String name, String description) {
         super(code, name, description);

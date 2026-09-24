@@ -107,6 +107,18 @@ Represents the current status of a user's access to the marketplace system.
 | INACTIVE | Inactive | User exists but cannot perform system operations. |
 | BLOCKED  | Blocked  | User access has been suspended.                   |
 
+## Lifecycle
+
+```text
+ACTIVE ──────> BLOCKED
+   │  <──────────┘
+   │
+   └─────────> INACTIVE
+      <──────────┘
+```
+
+A blocked or inactive user can only return to `ACTIVE`.
+
 ---
 
 # BuyerStatus
@@ -129,6 +141,18 @@ It determines whether the buyer is enabled to place orders and is independent fr
 | SUSPENDED | Suspended | Buyer is temporarily disabled from placing orders.      |
 | BLOCKED   | Blocked   | Buyer's commercial activity has been permanently disabled.|
 
+## Lifecycle
+
+```text
+ACTIVE <──────> SUSPENDED
+   │                │
+   └──────┬─────────┘
+          ▼
+       BLOCKED
+```
+
+`BLOCKED` is permanent: it has no outgoing transitions.
+
 ---
 
 # SellerStatus
@@ -150,6 +174,19 @@ It determines whether the seller is enabled to publish and manage products.
 | ACTIVE    | Active    | Seller is enabled to publish and manage products.   |
 | SUSPENDED | Suspended | Seller is temporarily disabled from selling.        |
 | INACTIVE  | Inactive  | Seller exists but is not currently operating.       |
+
+## Lifecycle
+
+```text
+ACTIVE ──────> SUSPENDED
+   ▲               │
+   │ <─────────────┘
+   │
+   ├─────────> INACTIVE
+   │ <─────────────┘
+```
+
+A suspended or inactive seller can return to `ACTIVE`. An active or suspended seller can become `INACTIVE`.
 
 ---
 
@@ -227,6 +264,18 @@ A key business rule depends on this value: stock marked as `DAMAGED` cannot be r
 | RESERVED  | Reserved  | Stock set aside for an order in progress.        |
 | DAMAGED   | Damaged   | Stock not fit for sale; cannot be reserved.      |
 
+## Lifecycle
+
+```text
+AVAILABLE <──────> RESERVED
+     │                 │
+     └───────┬─────────┘
+             ▼
+          DAMAGED
+```
+
+`AVAILABLE` and `RESERVED` are updated automatically from the quantities: the inventory is `RESERVED` when no units are available and some units are reserved. `DAMAGED` is set explicitly and blocks new reservations.
+
 ---
 
 # InventoryMovementType
@@ -284,14 +333,16 @@ CART
 PENDING_PAYMENT
    │
    ▼
-PAID
-   │
-   ▼
-SHIPPED
-   │
-   ▼
-DELIVERED
+PAID ─────────────────────┐
+   │                      │ (digital-only orders)
+   ▼                      │
+SHIPPED                   │
+   │                      │
+   ▼                      │
+DELIVERED <───────────────┘
 ```
+
+Orders that contain physical products must be shipped before delivery. Orders with only digital products are delivered right after payment. `DELIVERED` is final: a finalized order cannot be modified.
 
 ---
 

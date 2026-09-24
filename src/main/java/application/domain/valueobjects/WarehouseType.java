@@ -3,9 +3,9 @@ package application.domain.valueobjects;
 public final class WarehouseType extends DomainCatalog {
 
     public static final WarehouseType MARKETPLACE = new WarehouseType(
-            "MARKETPLACE", "Bodega del Marketplace", "Bodega administrada directamente por la plataforma.");
+            "MARKETPLACE", "Marketplace Warehouse", "Warehouse managed directly by the platform.");
     public static final WarehouseType SELLER = new WarehouseType(
-            "SELLER", "Bodega de Vendedor", "Bodega perteneciente y administrada por un vendedor.");
+            "SELLER", "Seller Warehouse", "Warehouse owned and managed by a seller.");
 
     private WarehouseType(String code, String name, String description) {
         super(code, name, description);

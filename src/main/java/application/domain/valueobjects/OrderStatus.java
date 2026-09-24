@@ -3,15 +3,15 @@ package application.domain.valueobjects;
 public final class OrderStatus extends DomainCatalog {
 
     public static final OrderStatus CART = new OrderStatus(
-            "CART", "Carrito", "Selección provisional de productos antes de confirmar el pedido.");
+            "CART", "Cart", "Provisional selection of products.");
     public static final OrderStatus PENDING_PAYMENT = new OrderStatus(
-            "PENDING_PAYMENT", "Pendiente de Pago", "El pedido espera la confirmación del pago.");
+            "PENDING_PAYMENT", "Pending Payment", "Order awaits payment confirmation.");
     public static final OrderStatus PAID = new OrderStatus(
-            "PAID", "Pagado", "El pago fue confirmado y se inician los procesos de alistamiento.");
+            "PAID", "Paid", "Payment confirmed; fulfillment processes begin.");
     public static final OrderStatus SHIPPED = new OrderStatus(
-            "SHIPPED", "Despachado", "El pedido salió físicamente de la bodega.");
+            "SHIPPED", "Shipped", "Order has physically left the warehouse.");
     public static final OrderStatus DELIVERED = new OrderStatus(
-            "DELIVERED", "Entregado", "El pedido fue entregado y se considera finalizado.");
+            "DELIVERED", "Delivered", "Order delivered and considered finalized.");
 
     private OrderStatus(String code, String name, String description) {
         super(code, name, description);
