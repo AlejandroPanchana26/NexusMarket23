@@ -33,6 +33,9 @@ public class Order {
     // Valor total del pedido.
     private BigDecimal total;
 
+    // Bodega donde se reservaron las unidades; de aquí saldrá el despacho. Vacía si el pedido es solo digital.
+    private Warehouse fulfillmentWarehouse;
+
     // Crea el pedido a partir del carrito, conservando los precios con los que se agregaron los productos.
     public static Order fromCart(ShoppingCart cart) {
         if (cart == null || cart.isEmpty()) {

@@ -496,7 +496,7 @@ Represents a single line within a shopping cart: a product with its quantity and
 
 ## Description
 
-Represents the formal commercial commitment made by a buyer. Its lifecycle is the central process of the system. A finalized order cannot be modified under any circumstance.
+Represents the formal commercial commitment made by a buyer. Its lifecycle is the central process of the system. A finalized order cannot be modified under any circumstance. An order that contains physical products is shipped from a single warehouse.
 
 ## Lifecycle
 
@@ -515,6 +515,7 @@ CART → PENDING_PAYMENT → PAID → SHIPPED → DELIVERED
 | status       | OrderStatus        | Current lifecycle status of the order.   |
 | creationDate | LocalDateTime      | Date and time when the order was created.|
 | total        | BigDecimal         | Total value of the order.                |
+| fulfillmentWarehouse | Warehouse    | Warehouse where the units were reserved and from which the order ships. Empty for digital-only orders. |
 
 ## Behavior
 
@@ -533,6 +534,7 @@ CART → PENDING_PAYMENT → PAID → SHIPPED → DELIVERED
 ## Relationships
 
 * An `Order` is placed by one `Buyer`.
+* An `Order` with physical products is fulfilled from a single `Warehouse` (`fulfillmentWarehouse`).
 * An `Order` contains multiple `OrderDetail` instances.
 * An `Order` may be billed by an `Invoice`, shipped by a `Shipment`, and may generate a `Return`.
 
