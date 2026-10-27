@@ -1,0 +1,73 @@
+# Entorno completo de NexusMarket: MySQL, MongoDB y la aplicación.
+# Solo bases de datos:  docker compose up -d mysql-db mongo-db
+# Todo el sistema:      docker compose up -d --build
+# Detener:              docker compose down
+services:
+
+  # Datos del negocio: personas, productos, inventario, pedidos, facturas, envíos y devoluciones.
+  mysql-db:
+    image: mysql:8.0
+    container_name: nexusmarket-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: nexusmarket_db
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_USER: nexus_app
+      MYSQL_PASSWORD: nexus_pass
+    # En el PC se publica en el 3307 porque el 3306 suele estar ocupado por un MySQL local.
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # La aplicación espera a que MySQL responda antes de arrancar.
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -proot_pass --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Historial de movimientos de inventario (trazabilidad).
+  mongo-db:
+    image: mongo:6.0
+    container_name: nexusmarket-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Aplicación Spring Boot. Dentro de Docker se conecta a las bases de datos por el nombre del servicio.
+  nexusmarket-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexusmarket-app
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - maven_cache:/root/.m2
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: "jdbc:mysql://mysql-db:3306/nexusmarket_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      DB_USERNAME: nexus_app
+      DB_PASSWORD: nexus_pass
+      MONGODB_URI: "mongodb://mongo-db:27017/nexusmarket_history"
+      SERVER_PORT: 8080
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      mongo-db:
+        condition: service_healthy
+    command: ["mvn", "-B", "spring-boot:run"]
+
+# Los volúmenes conservan los datos aunque se detengan los contenedores.
+volumes:
+  mysql_data:
+  mongo_data:
+  maven_cache:
