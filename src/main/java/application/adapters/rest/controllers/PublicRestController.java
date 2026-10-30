@@ -2,10 +2,12 @@ package application.adapters.rest.controllers;
 
 import application.adapters.rest.dtos.requests.LoginRequest;
 import application.adapters.rest.dtos.requests.RegisterBuyerRequest;
+import application.adapters.rest.dtos.responses.LoginResponse;
 import application.adapters.rest.dtos.responses.ProductResponse;
 import application.adapters.rest.dtos.responses.UserResponse;
 import application.adapters.rest.mappers.ProductRestMapper;
 import application.adapters.rest.mappers.UserRestMapper;
+import application.adapters.security.JwtService;
 import application.domain.models.User;
 import application.domain.ports.in.PublicAccessPort;
 import jakarta.validation.Valid;
@@ -25,9 +27,11 @@ import java.util.List;
 public class PublicRestController {
 
     private final PublicAccessPort publicAccessPort;
+    private final JwtService jwtService;
 
-    public PublicRestController(PublicAccessPort publicAccessPort) {
+    public PublicRestController(PublicAccessPort publicAccessPort, JwtService jwtService) {
         this.publicAccessPort = publicAccessPort;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/register")
@@ -36,9 +40,12 @@ public class PublicRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(UserRestMapper.toResponse(user));
     }
 
+    // Si el usuario y la contraseña son correctos, entrega el token para las siguientes peticiones.
     @PostMapping("/login")
-    public UserResponse login(@Valid @RequestBody LoginRequest request) {
-        return UserRestMapper.toResponse(publicAccessPort.login(request.username(), request.password()));
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        User user = publicAccessPort.login(request.username(), request.password());
+        return new LoginResponse(jwtService.generateToken(user), "Bearer", jwtService.getExpirationMinutes(),
+                UserRestMapper.toResponse(user));
     }
 
     @GetMapping("/products")
