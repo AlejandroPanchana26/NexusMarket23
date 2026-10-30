@@ -2,9 +2,14 @@ package application.adapters.rest.mappers;
 
 import application.adapters.persistence.CatalogMapper;
 import application.adapters.rest.dtos.requests.RegisterBuyerRequest;
+import application.adapters.rest.dtos.requests.RegisterEmployeeRequest;
+import application.adapters.rest.dtos.requests.RegisterSellerRequest;
+import application.adapters.rest.dtos.responses.PersonStatusResponse;
 import application.adapters.rest.dtos.responses.UserResponse;
 import application.domain.models.Buyer;
+import application.domain.models.Employee;
 import application.domain.models.Person;
+import application.domain.models.Seller;
 import application.domain.models.User;
 
 import java.util.ArrayList;
@@ -49,5 +54,35 @@ public final class UserRestMapper {
             }
         }
         return buyer;
+    }
+
+    public static Seller toSeller(RegisterSellerRequest request) {
+        Seller seller = new Seller();
+        seller.setIdentification(request.identification());
+        seller.setName(request.name());
+        seller.setEmail(request.email());
+        seller.setPhoneNumber(request.phoneNumber());
+        return seller;
+    }
+
+    public static Employee toEmployee(RegisterEmployeeRequest request) {
+        Employee employee = new Employee();
+        employee.setIdentification(request.identification());
+        employee.setName(request.name());
+        employee.setEmail(request.email());
+        employee.setPhoneNumber(request.phoneNumber());
+        return employee;
+    }
+
+    // El estado que se muestra depende del tipo de persona.
+    public static PersonStatusResponse toPersonStatusResponse(Person person) {
+        String status = null;
+        if (person instanceof Seller seller) {
+            status = CatalogMapper.toCode(seller.getSellerStatus());
+        } else if (person instanceof Buyer buyer) {
+            status = CatalogMapper.toCode(buyer.getCommercialStatus());
+        }
+        return new PersonStatusResponse(person.getIdentification(), person.getName(),
+                CatalogMapper.toCode(person.getRole()), status);
     }
 }

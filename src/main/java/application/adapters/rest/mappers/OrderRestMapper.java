@@ -4,6 +4,7 @@ import application.adapters.persistence.CatalogMapper;
 import application.adapters.rest.dtos.responses.InvoiceResponse;
 import application.adapters.rest.dtos.responses.OrderLineResponse;
 import application.adapters.rest.dtos.responses.OrderResponse;
+import application.domain.exceptions.BusinessRuleViolationException;
 import application.domain.models.DigitalProduct;
 import application.domain.models.Invoice;
 import application.domain.models.Order;
@@ -81,5 +82,14 @@ public final class OrderRestMapper {
                 order.getBuyer().getIdentification(),
                 warehouseName,
                 lines);
+    }
+
+    // Convierte el estado que llega como texto en la dirección; si no existe, responde 400.
+    public static OrderStatus toOrderStatus(String code) {
+        OrderStatus status = CatalogMapper.orderStatus(code);
+        if (status == null) {
+            throw new BusinessRuleViolationException("Invalid order status: " + code + ".");
+        }
+        return status;
     }
 }

@@ -29,4 +29,11 @@ public final class WarehouseRestMapper {
         }
         return responses;
     }
+
+    public static Warehouse toWarehouse(String name, String address) {
+        Warehouse warehouse = new Warehouse();
+        warehouse.setName(name);
+        warehouse.setAddress(address);
+        return warehouse;
+    }
 }
