@@ -1,7 +1,9 @@
 package application.adapters.rest.mappers;
 
 import application.adapters.persistence.CatalogMapper;
+import application.adapters.rest.dtos.requests.CreateProductRequest;
 import application.adapters.rest.dtos.responses.ProductResponse;
+import application.domain.exceptions.BusinessRuleViolationException;
 import application.domain.models.DigitalProduct;
 import application.domain.models.PhysicalProduct;
 import application.domain.models.Product;
@@ -62,5 +64,30 @@ public final class ProductRestMapper {
             responses.add(toPublicResponse(product));
         }
         return responses;
+    }
+
+    // Según el tipo indicado se crea un producto físico o uno digital.
+    public static Product toProduct(CreateProductRequest request) {
+        Product product;
+        if ("PHYSICAL".equals(request.type())) {
+            PhysicalProduct physical = new PhysicalProduct();
+            physical.setWeight(request.weight());
+            product = physical;
+        } else if ("DIGITAL".equals(request.type())) {
+            DigitalProduct digital = new DigitalProduct();
+            digital.setDownloadUrl(request.downloadUrl());
+            product = digital;
+        } else {
+            throw new BusinessRuleViolationException("Product type must be PHYSICAL or DIGITAL.");
+        }
+        product.setName(request.name());
+        product.setDescription(request.description());
+        product.setPrice(request.price());
+        if (request.variants() != null) {
+            for (String variant : request.variants()) {
+                product.addVariant(variant);
+            }
+        }
+        return product;
     }
 }
