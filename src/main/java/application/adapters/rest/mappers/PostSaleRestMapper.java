@@ -4,7 +4,9 @@ import application.adapters.persistence.CatalogMapper;
 import application.adapters.rest.dtos.responses.RefundResponse;
 import application.adapters.rest.dtos.responses.ReturnResponse;
 import application.domain.models.Refund;
+import application.domain.exceptions.BusinessRuleViolationException;
 import application.domain.models.Return;
+import application.domain.valueobjects.ReturnStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +41,14 @@ public final class PostSaleRestMapper {
                 refund.getAmount(),
                 CatalogMapper.toCode(refund.getStatus()),
                 refund.getDate());
+    }
+
+    // Convierte el estado que llega como texto en la dirección; si no existe, responde 400.
+    public static ReturnStatus toReturnStatus(String code) {
+        ReturnStatus status = CatalogMapper.returnStatus(code);
+        if (status == null) {
+            throw new BusinessRuleViolationException("Invalid return status: " + code + ".");
+        }
+        return status;
     }
 }
