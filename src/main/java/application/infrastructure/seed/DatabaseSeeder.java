@@ -83,7 +83,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         User admin = userAccountService.createUser(adminPerson, "admin", "admin123");
 
         registerEmployeeService.register(admin, employee("1000000002", "Logistics Operator", "operator@nexusmarket.com"),
-                SystemRole.LOGISTICS_OPERATOR, "operador", "operador123");
+                SystemRole.LOGISTICS_OPERATOR, "operator", "operator123");
         registerEmployeeService.register(admin, employee("1000000003", "Operations Supervisor", "supervisor@nexusmarket.com"),
                 SystemRole.SUPERVISOR, "supervisor", "supervisor123");
 
@@ -91,17 +91,17 @@ public class DatabaseSeeder implements CommandLineRunner {
         sellerPerson.setIdentification("900123456");
         sellerPerson.setName("TecnoStore");
         sellerPerson.setEmail("contact@tecnostore.com");
-        Warehouse northWarehouse = warehouse("Bodega Norte", "Calle 10 # 20-30");
-        User seller = registerSellerService.register(admin, sellerPerson, northWarehouse, "tecnostore", "vendedor123");
+        Warehouse northWarehouse = warehouse("North Warehouse", "10th Street # 20-30");
+        User seller = registerSellerService.register(admin, sellerPerson, northWarehouse, "tecnostore", "seller123");
 
-        registerWarehouseService.register(admin, warehouse("Bodega Central", "Carrera 50 # 40-20"), null);
+        registerWarehouseService.register(admin, warehouse("Central Warehouse", "50th Avenue # 40-20"), null);
 
         Buyer buyerPerson = new Buyer();
         buyerPerson.setIdentification("1017123456");
         buyerPerson.setName("Ana Gomez");
         buyerPerson.setEmail("ana.gomez@mail.com");
-        buyerPerson.setPrincipalAddress("Calle 50 # 40-20");
-        registerBuyerService.register(buyerPerson, "ana", "comprador123");
+        buyerPerson.setPrincipalAddress("50th Street # 40-20");
+        registerBuyerService.register(buyerPerson, "ana", "buyer123");
 
         PhysicalProduct shirt = new PhysicalProduct();
         shirt.setName("Cotton T-Shirt");

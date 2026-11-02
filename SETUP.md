@@ -74,12 +74,12 @@ On the first start, `DatabaseSeeder` creates these users (it does nothing on lat
 | Username | Password | Role |
 | -------- | -------- | ---- |
 | `admin` | `admin123` | Administrator |
-| `operador` | `operador123` | Logistics operator |
+| `operator` | `operator123` | Logistics operator |
 | `supervisor` | `supervisor123` | Supervisor |
-| `tecnostore` | `vendedor123` | Seller (owner of "Bodega Norte") |
-| `ana` | `comprador123` | Buyer |
+| `tecnostore` | `seller123` | Seller (owner of "North Warehouse") |
+| `ana` | `buyer123` | Buyer |
 
-It also creates the marketplace warehouse "Bodega Central", a published physical product with 20 units in stock, and a published digital product.
+It also creates the marketplace warehouse "Central Warehouse", a published physical product with 20 units in stock, and a published digital product.
 
 ---
 
@@ -154,7 +154,7 @@ The values are read from environment variables. The defaults are meant for local
 
 ### Authentication
 
-1. Log in with `POST http://localhost:8080/api/public/login` and the body `{ "username": "ana", "password": "comprador123" }`.
+1. Log in with `POST http://localhost:8080/api/public/login` and the body `{ "username": "ana", "password": "buyer123" }`.
 2. The response contains a `token`.
 3. Send it in every other request with the header `Authorization: Bearer <token>`.
 
@@ -179,7 +179,7 @@ Complete purchase and post-sale flow:
 | 2 | 2. Seller | Create product → Publish product → List my warehouses → Register inventory |
 | 3 | 0. Public | Login as buyer (ana) |
 | 4 | 1. Buyer | Add to cart → Place order → Pay order |
-| 5 | 0. Public | Login as logistics operator (operador) |
+| 5 | 0. Public | Login as logistics operator (operator) |
 | 6 | 3. Logistics Operator | Prepare shipment → Dispatch shipment → Mark in transit → Confirm delivery |
 | 7 | 0. Public, then 1. Buyer | Login as buyer (ana) → Track shipment → Request return |
 | 8 | 0. Public, then 2. Seller | Login as seller → Approve return → Create refund |

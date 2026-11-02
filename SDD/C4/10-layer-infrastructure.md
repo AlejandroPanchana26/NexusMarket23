@@ -8,8 +8,8 @@ It creates the first administrator directly (registering employees requires an a
 
 | Data | Detail |
 | ---- | ------ |
-| Users | `admin`, `operador`, `supervisor`, `tecnostore` (seller), `ana` (buyer) |
-| Warehouses | "Bodega Norte" (seller) and "Bodega Central" (marketplace) |
+| Users | `admin`, `operator`, `supervisor`, `tecnostore` (seller), `ana` (buyer) |
+| Warehouses | "North Warehouse" (seller) and "Central Warehouse" (marketplace) |
 | Products | A published physical product with 20 units in stock, and a published digital product |
 
 ## Configuration

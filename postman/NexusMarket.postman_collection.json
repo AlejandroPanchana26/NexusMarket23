@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "NexusMarket API",
-    "description": "All NexusMarket endpoints grouped by role.\n\n1. Run one of the login requests in '0. Public'. The token is saved automatically.\n2. Run the requests of that role. Identifiers (productId, orderId, shipmentId, returnId, refundId, inventoryId, warehouseId) are saved automatically by the requests that create them.\n3. To act as another role, run that role's login.\n\nSeed users: admin/admin123, operador/operador123, supervisor/supervisor123, tecnostore/vendedor123, ana/comprador123.",
+    "description": "All NexusMarket endpoints grouped by role.\n\n1. Run one of the login requests in '0. Public'. The token is saved automatically.\n2. Run the requests of that role. Identifiers (productId, orderId, shipmentId, returnId, refundId, inventoryId, warehouseId) are saved automatically by the requests that create them.\n3. To act as another role, run that role's login.\n\nSeed users: admin/admin123, operator/operator123, supervisor/supervisor123, tecnostore/seller123, ana/buyer123.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -91,7 +91,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"identification\": \"1030405060\",\n  \"name\": \"Carlos Ruiz\",\n  \"email\": \"carlos.ruiz@mail.com\",\n  \"phoneNumber\": \"3109876543\",\n  \"principalAddress\": \"Calle 30 # 15-40\",\n  \"additionalAddresses\": [\n    \"Office 201\"\n  ],\n  \"username\": \"carlos\",\n  \"password\": \"carlos123\"\n}",
+              "raw": "{\n  \"identification\": \"1030405060\",\n  \"name\": \"Carlos Ruiz\",\n  \"email\": \"carlos.ruiz@mail.com\",\n  \"phoneNumber\": \"3109876543\",\n  \"principalAddress\": \"30th Street # 15-40\",\n  \"additionalAddresses\": [\n    \"Office 201\"\n  ],\n  \"username\": \"carlos\",\n  \"password\": \"carlos123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -126,7 +126,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"ana\",\n  \"password\": \"comprador123\"\n}",
+              "raw": "{\n  \"username\": \"ana\",\n  \"password\": \"buyer123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -175,7 +175,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"tecnostore\",\n  \"password\": \"vendedor123\"\n}",
+              "raw": "{\n  \"username\": \"tecnostore\",\n  \"password\": \"seller123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -202,7 +202,7 @@
           ]
         },
         {
-          "name": "Login as logistics operator (operador)",
+          "name": "Login as logistics operator (operator)",
           "request": {
             "method": "POST",
             "header": [
@@ -224,7 +224,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"operador\",\n  \"password\": \"operador123\"\n}",
+              "raw": "{\n  \"username\": \"operator\",\n  \"password\": \"operator123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1623,7 +1623,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"identification\": \"900777888\",\n  \"name\": \"HomeStore\",\n  \"email\": \"contact@homestore.com\",\n  \"phoneNumber\": \"6045551234\",\n  \"username\": \"homestore\",\n  \"password\": \"home123\",\n  \"warehouseName\": \"Bodega Oriente\",\n  \"warehouseAddress\": \"Carrera 30 # 60-10\"\n}",
+              "raw": "{\n  \"identification\": \"900777888\",\n  \"name\": \"HomeStore\",\n  \"email\": \"contact@homestore.com\",\n  \"phoneNumber\": \"6045551234\",\n  \"username\": \"homestore\",\n  \"password\": \"home123\",\n  \"warehouseName\": \"East Warehouse\",\n  \"warehouseAddress\": \"30th Avenue # 60-10\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1655,7 +1655,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"identification\": \"1000000004\",\n  \"name\": \"Second Operator\",\n  \"email\": \"operator2@nexusmarket.com\",\n  \"phoneNumber\": \"3001112233\",\n  \"role\": \"LOGISTICS_OPERATOR\",\n  \"username\": \"operador2\",\n  \"password\": \"operador123\"\n}",
+              "raw": "{\n  \"identification\": \"1000000004\",\n  \"name\": \"Second Operator\",\n  \"email\": \"operator2@nexusmarket.com\",\n  \"phoneNumber\": \"3001112233\",\n  \"role\": \"LOGISTICS_OPERATOR\",\n  \"username\": \"operator2\",\n  \"password\": \"operator123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1687,7 +1687,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Bodega Occidente\",\n  \"address\": \"Calle 10 Sur # 50-30\",\n  \"sellerIdentification\": null\n}",
+              "raw": "{\n  \"name\": \"West Warehouse\",\n  \"address\": \"10th South Street # 50-30\",\n  \"sellerIdentification\": null\n}",
               "options": {
                 "raw": {
                   "language": "json"
